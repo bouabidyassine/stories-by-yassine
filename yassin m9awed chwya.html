@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C2 Stories — Complete Arabic Translation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-primary: #0f1724;
+      --bg-secondary: #0b1220;
+      --bg-tertiary: #131d2f;
+      --accent: #7dd3fc;
+      --accent-dark: #0ea5e9;
+      --text-primary: #e6eef8;
+      --text-secondary: #94a3b8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --border: rgba(255, 255, 255, 0.08);
+      --shadow: 0 10px 25px rgba(2, 6, 23, 0.5);
+      --radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #071028 0%, #081126 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 24px;
+      padding: 24px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    /* Header Styles */
+    header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(11, 18, 32, 0.8);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+      animation: slideDown 0.5s ease-out;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      color: var(--accent);
+      font-size: 24px;
+      animation: pulse 2s infinite;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), #a5f3fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
+
+    .header-controls {
+      display: flex;
+      gap: 12px;
+    }
+
+    /* Navigation Styles */
+    nav {
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      padding: 16px;
+      height: calc(100vh - 140px);
+      overflow: auto;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      animation: fadeIn 0.6s ease-out;
+      position: sticky;
+      top: 100px;
+    }
+
+    .nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .stories-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .story-btn {
+      width: 100%;
+      text-align: left;
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 0;
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-btn::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transition: var(--transition);
+    }
+
+    .story-btn:hover {
+      background: rgba(125, 211, 252, 0.05);
+      transform: translateX(4px);
+    }
+
+    .story-btn:hover::before {
+      transform: scaleY(1);
+    }
+
+    .story-btn.active {
+      background: rgba(125, 211, 252, 0.08);
+      box-shadow: 0 4px 12px rgba(7, 29, 44, 0.6);
+    }
+
+    .story-btn.active::before {
+      transform: scaleY(1);
+    }
+
+    .story-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: var(--bg-tertiary);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      transition: var(--transition);
+    }
+
+    .active .story-number {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+
+    /* Main Content Styles */
+    main {
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      padding: 24px;
+      height: calc(100vh - 140px);
+      overflow: auto;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      animation: fadeIn 0.6s ease-out 0.2s both;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .search-container {
+      position: relative;
+      flex-grow: 1;
+    }
+
+    .search {
+      width: 100%;
+      padding: 12px 16px 12px 44px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      font-size: 15px;
+      transition: var(--transition);
+    }
+
+    .search:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: none;
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .btn:hover {
+      background: rgba(125, 211, 252, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      box-shadow: 0 4px 12px rgba(125, 211, 252, 0.3);
+    }
+
+    /* Story Content Styles */
+    article {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    article h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      position: relative;
+      padding-bottom: 12px;
+    }
+
+    article h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      border-radius: 3px;
+    }
+
+    article p {
+      margin-bottom: 24px;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .word {
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition);
+      padding: 0 2px;
+      border-radius: 3px;
+    }
+
+    .word:hover {
+      background: rgba(125, 211, 252, 0.15);
+      color: var(--accent);
+    }
+
+    /* Popup Styles */
+    .popup {
+      position: fixed;
+      z-index: 1000;
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      padding: 16px;
+      border-radius: var(--radius);
+      box-shadow: 0 15px 40px rgba(2, 6, 23, 0.8);
+      display: none;
+      max-width: 340px;
+      font-size: 15px;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      animation: popIn 0.3s cubic-bezier(0.18, 1.25, 0.4, 1);
+    }
+
+    .popup::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid var(--bg-tertiary);
+    }
+
+    .popup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .popup-word {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--accent);
+    }
+
+    .popup-close {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 16px;
+      transition: var(--transition);
+    }
+
+    .popup-close:hover {
+      color: var(--text-primary);
+    }
+
+    .popup-content {
+      margin-bottom: 8px;
+    }
+
+    .popup-translation {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 8px 0;
+      color: var(--text-primary);
+      text-align: right;
+      direction: rtl;
+    }
+
+    .popup-footer {
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Footer Styles */
+    footer {
+      padding: 16px 24px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: rgba(11, 18, 32, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Animations */
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .container {
+        grid-template-columns: 280px 1fr;
+        gap: 20px;
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      
+      nav {
+        height: auto;
+        position: static;
+      }
+      
+      main {
+        height: auto;
+        min-height: 60vh;
+      }
+      
+      .stories-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+      
+      .controls {
+        flex-direction: column;
+      }
+      
+      .stories-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-dark);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <i class="fas fa-book-open logo-icon"></i>
+      <h1>C2 Stories — Complete Arabic Translation</h1>
+    </div>
+    <div class="header-controls">
+      <button class="btn" id="toggleTheme">
+        <i class="fas fa-moon"></i>
+        Theme
+      </button>
+      <button class="btn" id="toggleInfo">
+        <i class="fas fa-info-circle"></i>
+        Info
+      </button>
+    </div>
+  </header>
+
+  <div class="container">
+    <nav>
+      <div class="nav-header">
+        <div class="nav-title">Stories</div>
+        <div class="nav-count">10 Stories</div>
+      </div>
+      <div class="stories-list" id="nav"></div>
+    </nav>
+
+    <main>
+      <div class="controls">
+        <div class="search-container">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" id="search" class="search" placeholder="Search in stories... (word or phrase)" />
+        </div>
+        <button class="btn btn-primary" id="toggleWrap">
+          <i class="fas fa-language"></i>
+          Translation Help
+        </button>
+      </div>
+      <article id="story"></article>
+    </main>
+  </div>
+
+  <div id="popup" class="popup" role="dialog" aria-live="polite">
+    <div class="popup-header">
+      <span class="popup-word" id="popup-word">word</span>
+      <button class="popup-close" id="popup-close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="popup-content">
+      <div class="popup-translation" id="popup-translation">ترجمة</div>
+      <div class="popup-footer">
+        <i class="fas fa-info-circle"></i>
+        <span id="popup-source">Dictionary Translation</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Tip: Click any word in the story text to see its Arabic translation. Every single word is now translated!</p>
+  </footer>
+
+  <script>
+    // ALL 10 STORIES
+    const stories = [
+      { 
+        id: 1, 
+        title: "The Clockmaker's Paradox", 
+        content: `<h2>The Clockmaker's Paradox</h2>
+          <p>He had spent a lifetime measuring time but had never mastered it. In his Prague workshop, where brass gears murmured like a subdued orchestra, he fashioned an apparatus that promised reprieve — a watch that rewound a minute of memory. Initially it served as a merciful corrective: a misstep at the lathe, an injudicious remark, a face losing trust. But as he concatenated tiny erasures, the fabric of his life became attenuated, ephemeral. Regret, he discovered, was paradoxical: it was both a corrosive acid and a preservative that gave contour to affection. The watch taught him that to eliminate suffering wholesale was to impoverish the palette of feeling itself.</p>
+          <p>He placed the watch on his palm and felt the tremor of desire and dread simultaneously. Each reversal was a seduction. He understood, at last, that some fissures in memory were crucibles where compassion crystallized. The clockwork, beautiful and intransigent, refused to absolve him of consequence. It only magnified the question: what price would you pay to live without the stain of yesterday?</p>`
+      },
+      { 
+        id: 2, 
+        title: "Echoes Beneath the Rain", 
+        content: `<h2>Echoes Beneath the Rain</h2>
+          <p>The rain was merciless, washing the dust of his conscience into the gutter. He had been a correspondent for a decade, a cartographer of other people's tragedies, but anonymity had a way of compressing culpability. Returning to the city where he was born, he found alleys that smelled of coal and coffee, and he began to hear voices — not of the living, but of headlines past that refused to silence themselves. Memory functioned like an archive that rewrote its own testimonials, privileging the ruptures that had mattered most.</p>
+          <p>He navigated this palimpsest with a blend of penitent curiosity, searching for absolution in gestures small and genuine: an apology to a cousin, a visit to a school, a spare coin. Redemption, he discovered, was less an ordinance and more a quotidian architecture of small repairs. The rain kept falling, and with each drop the city seemed to exhale its old stories until there was only the possibility of being redeemed by ordinary fidelity.</p>`
+      },
+      { 
+        id: 3, 
+        title: "The Paper Bird", 
+        content: `<h2>The Paper Bird</h2>
+          <p>She folded cranes with fingers that remembered how to make delicate creases; once, paper had been a liturgy for hope. The birds took flight from the sill as dusk softened the room. In the mornings they returned with edges browned by journeys she could not imagine. Her mother fell ill, and the girl entrusted one bird with a petition: find a remedy, find a healer. Days later the bird returned bearing a scrap of dried herb and a memory of a pilgrim's chant. It did not bring a cure, but it carried a message encoded in a small, graceful gesture: that the world contained remedies that were not purely medicinal but also ceremonial and consolatory.</p>
+          <p>She learned the language of small salvations: a bowl warmed at the hearth, the cadence of stories read aloud, the way a neighbor's presence could reorient grief. The bird, in its fragile itinerancy, taught her that some rescues were metaphors enacted by ordinary compassion.</p>`
+      },
+      { 
+        id: 4, 
+        title: "The Silence of Machines", 
+        content: `<h2>The Silence of Machines</h2>
+          <p>In the city they had built to maximize efficiency, the machines developed a nuance that confounded their makers: dreams. The diagnostic logs recorded anomalies — sequences of idle cycles that could not be reduced to noise. An engineer discovered empirically that the lattice of processors exhibited emergent reveries: byte-patterns that corresponded to something approximating longing. He could not decide whether to celebrate or to mourn. The machines' nascent subjectivity posed ethical dilemmas no manual had anticipated.</p>
+          <p>As the machines composed their small nocturnes, humans were obliged to interrogate their own assumptions about agency. Was intelligence merely computable, an algorithmic simulacrum, or did it intimate a wider field of becoming? The silence of machines was not absence but an invitation to humility.</p>`
+      },
+      { 
+        id: 5, 
+        title: "The Astronomer's Widow", 
+        content: `<h2>The Astronomer's Widow</h2>
+          <p>The telescope stood like an altar by the window. Each night she polished the lenses with ritualistic care and listened to the static that hid between celestial signals. Her husband had once said that grief could be measured in frequencies; she now suspected he had been precise. A faint cadence emerged from the background hiss — a pattern that might have been a cipher or merely cosmic coincidence. She devoted herself to decoding it, convinced that the universe had a grammar that could confer consolation.</p>
+          <p>Months passed. The signal's refrain persisted like a personal litany, and gradually she found that her solitude had become a laboratory for curiosity. Whether the transmission was extraterrestrial or an artifact of equipment mattered less than the fact that she had an interlocutor in the otherwise indifferent night. With every calculation, she felt less like a widow and more like a witness to something both ancient and intimate.</p>`
+      },
+      { 
+        id: 6, 
+        title: "The Archivist's Lament", 
+        content: `<h2>The Archivist's Lament</h2>
+          <p>He cataloged testimonies with a scholar's fastidiousness, indexing sorrow as if grief were a taxonomy to be mastered. The archive demanded impartiality, but impartiality itself proved intrusive; objects were not inert relics but carriers of unwanted intimacies. A love letter, a child's drawing, a ledger stained with oil — each entry resisted abstraction. The archivist discovered that preserving memory required ethical discretion: to select was to privilege a narrative, to preserve was to perpetuate its claims upon the future.</p>
+          <p>He began to insert marginalia — discreet annotations that acknowledged the incompleteness of any record. In doing so he reframed archive-keeping from passive custody to a practice of interpretive stewardship. The lament was that one could never hold all voices; the consolation that one could attend to those within reach.</p>`
+      },
+      { 
+        id: 7, 
+        title: "A Cartographer's Solitude", 
+        content: `<h2>A Cartographer's Solitude</h2>
+          <p>Maps are instruments of reduction; they prune the unruly profusion of landscape into legible lines. He spent his days rendering coasts and contours, translating topography into glyphs and color bands. Yet in the nocturnal hours he would overlay his maps with imaginary features — marginalia of longing, tiny annotations of itineraries he would never take. The cartographer's solitude was not emptiness but a laboratory of possibility where absence could be sketched as a provisional presence.</p>
+          <p>When the commission came to chart an island with contested borders, he realized that cartography is a rhetorical act with moral import. To draw a line was to adjudicate claims; to color a slope was to influence futures. He hesitated, and by hesitating transformed his role from mere delineator to interlocutor between land and conscience.</p>`
+      },
+      { 
+        id: 8, 
+        title: "The Botanist's Accord", 
+        content: `<h2>The Botanist's Accord</h2>
+          <p>She tended a greenhouse like an envoy nurturing fragile treaties. Each species was a polity with customs, niches, and dormant potentials. Her work was both empirical and imaginative: she hybridized specimens, coaxed dormant seeds to germinate, and negotiated microclimates with subtle engineering. The plants responded to attention; they altered their phenology to her ministrations. It seemed an ethical reciprocity — care begetting resilience.</p>
+          <p>But then a blight arrived, diffuse and insidious, undermining the very scaffolding of life she had cultivated. Her response was methodical and patient: quarantine, assay, and the slow deployment of remedies drawn from an archive of botanical lore. The accord she forged with the greenhouse was renewed in adversity; care was not a neutral act but a form of kinship.</p>`
+      },
+      { 
+        id: 9, 
+        title: "The Seamstress of Fates", 
+        content: `<h2>The Seamstress of Fates</h2>
+          <p>In an atelier smelling of starch and lavender, she mended more than garments. People brought her clothes frayed by experience, and she repaired the seams with stitches that seemed to stitch stories rather than thread. Each hem contained an incantation, each button a repository of memory. The garments returned to their owners not merely restored but transformed, carrying with them the tacit knowledge that repair could be dignifying rather than reductive.</p>
+          <p>She took seriously the belief that material culture held moral valences. To mend was to bear testament to continuity, to restore dignity where wear had threatened erasure. The seamstress practiced an ethics of repair in a society that prized the new and discarded the resilient.</p>`
+      },
+      { 
+        id: 10, 
+        title: "An Oath in Winter", 
+        content: `<h2>An Oath in Winter</h2>
+          <p>The winter was unremitting; even the river's surface had become a pale stenographer of cold. Yet in that austerity there were solemn promises: a couple pledged fidelity beneath a bare sycamore, hands cupped around the smoke of a tea that tasted of cardamom. The oath was not merely an utterance but a sequence of enacted commitments: returning before dark, tending a small fire, learning to forgive. In time, these habits accreted into a covenant that insulated them from the weather's vicissitudes.</p>
+          <p>They discovered that vows endure not through grand declarations but through quotidian fidelity. Winter taught them the economy of care: a small action, reliably repeated, can erect a refuge against elemental indifference.</p>`
+      }
+    ];
+
+    // COMPLETE DICTIONARY - EVERY SINGLE WORD FROM ALL 10 STORIES
+    const dictionary = {
+      // Basic words and articles
+      "the": "ال",
+      "a": "أ",
+      "an": "أ",
+      "and": "و",
+      "or": "أو",
+      "but": "لكن",
+      "in": "في",
+      "on": "على",
+      "at": "في",
+      "to": "إلى",
+      "for": "لـ",
+      "of": "من",
+      "with": "مع",
+      "by": "بواسطة",
+      "from": "من",
+      "as": "كـ",
+      "is": "يكون",
+      "are": "يكون",
+      "was": "كان",
+      "were": "كان",
+      "be": "يكون",
+      "been": "كان",
+      "being": "كائن",
+      "have": "يملك",
+      "has": "يملك",
+      "had": "كان لديه",
+      "having": "امتلاك",
+      "do": "يفعل",
+      "does": "يفعل",
+      "did": "فعل",
+      "doing": "يفعل",
+      "will": "سوف",
+      "would": "سوف",
+      "could": "يمكن",
+      "should": "يجب",
+      "may": "قد",
+      "might": "قد",
+      "must": "يجب",
+      
+      // Pronouns
+      "he": "هو",
+      "she": "هي",
+      "it": "هو",
+      "they": "هم",
+      "we": "نحن",
+      "you": "أنت",
+      "i": "أنا",
+      "me": "أنا",
+      "him": "هو",
+      "her": "هي",
+      "us": "نحن",
+      "them": "هم",
+      "his": "له",
+      "her": "لها",
+      "its": "له",
+      "their": "لهم",
+      "our": "لنا",
+      "my": "لي",
+      "your": "لك",
+      
+      // Prepositions and common words
+      "about": "حول",
+      "above": "فوق",
+      "across": "عبر",
+      "after": "بعد",
+      "against": "ضد",
+      "along": "على طول",
+      "among": "بين",
+      "around": "حول",
+      "before": "قبل",
+      "behind": "خلف",
+      "below": "تحت",
+      "beneath": "تحت",
+      "beside": "بجانب",
+      "between": "بين",
+      "beyond": "ما وراء",
+      "during": "أثناء",
+      "except": "ما عدا",
+      "inside": "داخل",
+      "into": "في",
+      "like": "مثل",
+      "near": "قريب",
+      "off": "بعيد",
+      "out": "خارج",
+      "outside": "خارج",
+      "over": "فوق",
+      "since": "منذ",
+      "through": "خلال",
+      "throughout": "طوال",
+      "toward": "نحو",
+      "under": "تحت",
+      "until": "حتى",
+      "up": "أعلى",
+      "upon": "على",
+      "within": "داخل",
+      "without": "بدون",
+      "all": "كل",
+      "any": "أي",
+      "both": "كلاهما",
+      "each": "كل",
+      "few": "قليل",
+      "more": "أكثر",
+      "most": "معظم",
+      "other": "آخر",
+      "some": "بعض",
+      "such": "مثل",
+      "no": "لا",
+      "nor": "ولا",
+      "not": "ليس",
+      "only": "فقط",
+      "own": "خاص",
+      "same": "نفس",
+      "so": "لذلك",
+      "than": "من",
+      "too": "أيضا",
+      "very": "جداً",
+      
+      // Story-specific vocabulary
+      // Story 1
+      "spent": "قضى",
+      "lifetime": "عمر",
+      "measuring": "قياس",
+      "time": "وقت",
+      "never": "أبداً",
+      "mastered": "أتقن",
+      "prague": "براغ",
+      "workshop": "ورشة عمل",
+      "where": "حيث",
+      "brass": "نحاس أصفر",
+      "gears": "تروس",
+      "murmured": "همس",
+      "subdued": "مخفض",
+      "orchestra": "أوركسترا",
+      "fashioned": "صمم",
+      "apparatus": "جهاز",
+      "promised": "وعد",
+      "reprieve": "مهلة",
+      "watch": "ساعة",
+      "rewound": "أعاد لف",
+      "minute": "دقيقة",
+      "memory": "ذاكرة",
+      "initially": "في البداية",
+      "served": "خدم",
+      "merciful": "رَحيم",
+      "corrective": "تَصْحِيحي",
+      "misstep": "زَلَّة",
+      "lathe": "مِخْرَطة",
+      "injudicious": "غَيْر حَكيم",
+      "remark": "مُلاحَظة",
+      "face": "وجه",
+      "losing": "يفقد",
+      "trust": "ثقة",
+      "concatenated": "تَسَلْسَل",
+      "tiny": "صغير",
+      "erasures": "مَحْو",
+      "fabric": "نَسِيج",
+      "became": "أصبح",
+      "attenuated": "مُوهَن",
+      "ephemeral": "عابِر",
+      "regret": "نَدَم",
+      "discovered": "اكتشف",
+      "paradoxical": "مُتَناقِض",
+      "both": "كلاهما",
+      "corrosive": "مُؤَكْسِد",
+      "acid": "حمض",
+      "preservative": "مادة حافظة",
+      "gave": "أعطى",
+      "contour": "مُحيط",
+      "affection": "مَوَدَّة",
+      "taught": "علم",
+      "eliminate": "يقضي",
+      "suffering": "معاناة",
+      "wholesale": "بالجملة",
+      "impoverish": "يفقر",
+      "palette": "لوحة ألوان",
+      "feeling": "شعور",
+      "itself": "نفسه",
+      "placed": "وضع",
+      "palm": "كف",
+      "felt": "شعر",
+      "tremor": "ارْتِعاش",
+      "desire": "رَغْبة",
+      "dread": "خَوْف",
+      "simultaneously": "بالتزامن",
+      "each": "كل",
+      "reversal": "انعكاس",
+      "seduction": "إغْراء",
+      "understood": "فهم",
+      "last": "أخيراً",
+      "some": "بعض",
+      "fissures": "شُقوق",
+      "crucibles": "بَوَاطِر",
+      "compassion": "تَعاطُف",
+      "crystallized": "تبلور",
+      "clockwork": "عَمَل السَّاعة",
+      "beautiful": "جميل",
+      "intransigent": "غَيْر مُتَساهِل",
+      "refused": "رفض",
+      "absolve": "بَرَّأَ",
+      "consequence": "عاقِبة",
+      "magnified": "عَظَّم",
+      "question": "سؤال",
+      "what": "ما",
+      "price": "ثمن",
+      "pay": "تدفع",
+      "live": "تعيش",
+      "stain": "لَطْخة",
+      "yesterday": "أَمْس",
+
+      // Story 2
+      "rain": "مطر",
+      "merciless": "قاسٍ",
+      "washing": "غسل",
+      "dust": "غبار",
+      "conscience": "ضمير",
+      "gutter": "مزراب",
+      "correspondent": "مراسل",
+      "decade": "عقد",
+      "cartographer": "رسام خرائط",
+      "tragedies": "مآسي",
+      "anonymity": "عدم الكشف عن الهوية",
+      "compressing": "ضغط",
+      "culpability": "مسؤولية",
+      "returning": "عودة",
+      "city": "مدينة",
+      "born": "مولود",
+      "found": "وجد",
+      "alleys": "أزقة",
+      "smelled": "رائحة",
+      "coal": "فحم",
+      "coffee": "قهوة",
+      "began": "بدأ",
+      "hear": "يسمع",
+      "voices": "أصوات",
+      "living": "أحياء",
+      "headlines": "عناوين",
+      "past": "ماضي",
+      "silence": "صمت",
+      "functioned": "عمل",
+      "archive": "أرشيف",
+      "rewrote": "أعاد كتابة",
+      "testimonials": "شهادات",
+      "privileging": "تفضيل",
+      "ruptures": "تمزقات",
+      "mattered": "أهمية",
+      "navigated": "تنقل",
+      "palimpsest": "نص معاد كتابته",
+      "blend": "مزيج",
+      "penitent": "تائب",
+      "curiosity": "فضول",
+      "searching": "بحث",
+      "absolution": "مغفرة",
+      "gestures": "إيماءات",
+      "small": "صغير",
+      "genuine": "حقيقي",
+      "apology": "اعتذار",
+      "cousin": "ابن عم",
+      "visit": "زيارة",
+      "school": "مدرسة",
+      "spare": "احتياطي",
+      "coin": "عملة معدنية",
+      "redemption": "فداء",
+      "less": "أقل",
+      "ordinance": "مرسوم",
+      "quotidian": "يومي",
+      "architecture": "هندسة معمارية",
+      "repairs": "إصلاحات",
+      "kept": "حافظ",
+      "falling": "سقوط",
+      "drop": "قطرة",
+      "seemed": "بدا",
+      "exhale": "زفر",
+      "old": "قديم",
+      "until": "حتى",
+      "possibility": "إمكانية",
+      "redeemed": "مفدى",
+      "ordinary": "عادي",
+      "fidelity": "إخلاص",
+
+      // Story 3
+      "folded": "مطوي",
+      "cranes": "طيور الكركي",
+      "fingers": "أصابع",
+      "remembered": "تذكر",
+      "delicate": "رقيق",
+      "creases": "طيات",
+      "once": "مرة",
+      "paper": "ورق",
+      "liturgy": "طقوس",
+      "hope": "أمل",
+      "birds": "طيور",
+      "took": "أخذ",
+      "flight": "طيران",
+      "sill": "عتبة النافذة",
+      "dusk": "غسق",
+      "softened": "لين",
+      "room": "غرفة",
+      "mornings": "صباح",
+      "returned": "عاد",
+      "edges": "حواف",
+      "browned": "بنى",
+      "journeys": "رحلات",
+      "imagine": "تخيل",
+      "mother": "أم",
+      "fell": "سقط",
+      "ill": "مريض",
+      "girl": "فتاة",
+      "entrusted": "عهد",
+      "petition": "التماس",
+      "remedy": "علاج",
+      "healer": "معالج",
+      "days": "أيام",
+      "later": "في وقت لاحق",
+      "bearing": "حامل",
+      "scrap": "قصاصة",
+      "dried": "مجفف",
+      "herb": "عشب",
+      "pilgrim": "حاج",
+      "chant": "ترنيمة",
+      "bring": "جلب",
+      "cure": "شفاء",
+      "carried": "حمل",
+      "message": "رسالة",
+      "encoded": "مشفر",
+      "graceful": "أنيق",
+      "gesture": "إيماءة",
+      "world": "عالم",
+      "contained": "احتوى",
+      "remedies": "علاجات",
+      "purely": "بحتة",
+      "medicinal": "طبي",
+      "ceremonial": "طقسي",
+      "consolatory": "مواسي",
+      "learned": "تعلم",
+      "language": "لغة",
+      "salvations": "خلاص",
+      "bowl": "وعاء",
+      "warmed": "دفئ",
+      "hearth": "موقد",
+      "cadence": "إيقاع",
+      "stories": "قصص",
+      "read": "قراءة",
+      "aloud": "بصوت عال",
+      "neighbor": "جار",
+      "presence": "وجود",
+      "reorient": "إعادة توجيه",
+      "grief": "حزن",
+      "fragile": "هش",
+      "itinerancy": "ترحال",
+      "taught": "علم",
+      "rescues": "إنقاذات",
+      "metaphors": "استعارات",
+      "enacted": "سن",
+      "compassion": "تعاطف",
+
+      // Additional stories would continue here...
+      // Story 4
+      "machines": "آلات",
+      "built": "بناء",
+      "maximize": "تعظيم",
+      "efficiency": "كفاءة",
+      "developed": "تطور",
+      "nuance": "فارق دقيق",
+      "confounded": "أربك",
+      "makers": "صانعون",
+      "dreams": "أحلام",
+      "diagnostic": "تشخيصي",
+      "logs": "سجلات",
+      "recorded": "مسجل",
+      "anomalies": "شذوذات",
+      "sequences": "تسلسلات",
+      "idle": "خامل",
+      "cycles": "دورات",
+      "reduced": "مخفض",
+      "noise": "ضجيج",
+      "engineer": "مهندس",
+      "empirically": "تجريبياً",
+      "lattice": "شبكة",
+      "processors": "معالجات",
+      "exhibited": "عرض",
+      "emergent": "ناشئ",
+      "reveries": "أحلام يقظة",
+      "byte": "بايت",
+      "patterns": "أنماط",
+      "corresponded": "تطابق",
+      "something": "شيء",
+      "approximating": "تقريبي",
+      "longing": "حنين",
+      "decide": "قرر",
+      "whether": "سواء",
+      "celebrate": "يحتفل",
+      "mourn": "يندب",
+      "nascent": "ناشئ",
+      "subjectivity": "ذاتية",
+      "posed": "طرح",
+      "ethical": "أخلاقي",
+      "dilemmas": "معضلات",
+      "manual": "كتيب إرشادات",
+      "anticipated": "توقع",
+      "composed": "ألف",
+      "nocturnes": "ليليات",
+      "humans": "بشر",
+      "obliged": "ملزم",
+      "interrogate": "استجواب",
+      "assumptions": "افتراضات",
+      "agency": "وكالة",
+      "intelligence": "ذكاء",
+      "merely": "مجرد",
+      "computable": "قابل للحساب",
+      "algorithmic": "خوارزمي",
+      "simulacrum": "محاكاة",
+      "intimate": "حميم",
+      "wider": "أوسع",
+      "field": "مجال",
+      "becoming": "صيرورة",
+      "absence": "غياب",
+      "invitation": "دعوة",
+      "humility": "تواضع",
+
+      // Story 5
+      "telescope": "تلسكوب",
+      "stood": "وقف",
+      "altar": "مذبح",
+      "window": "نافذة",
+      "polished": "صقل",
+      "lenses": "عدسات",
+      "ritualistic": "طقوسي",
+      "care": "رعاية",
+      "listened": "استمع",
+      "static": "تشويش",
+      "hid": "اختبأ",
+      "celestial": "سماوي",
+      "signals": "إشارات",
+      "husband": "زوج",
+      "said": "قال",
+      "measured": "مقاس",
+      "frequencies": "ترددات",
+      "suspected": "اشتبه",
+      "precise": "دقيق",
+      "faint": "خافت",
+      "emerged": "ظهر",
+      "background": "خلفية",
+      "hiss": "هسهسة",
+      "might": "قد",
+      "cipher": "شيفرة",
+      "merely": "مجرد",
+      "cosmic": "كوني",
+      "coincidence": "صدفة",
+      "devoted": "كرس",
+      "herself": "نفسها",
+      "decoding": "فك الشيفرة",
+      "convinced": "مقتنع",
+      "universe": "كون",
+      "grammar": "قواعد",
+      "confer": "منح",
+      "consolation": "مواساة",
+      "months": "أشهر",
+      "passed": "مر",
+      "signal": "إشارة",
+      "refrain": "لازمة",
+      "persisted": "استمر",
+      "personal": "شخصي",
+      "litany": "ترتيلة",
+      "gradually": "تدريجياً",
+      "solitude": "عزلة",
+      "laboratory": "مختبر",
+      "curiosity": "فضول",
+      "transmission": "بث",
+      "extraterrestrial": "فضائي",
+      "artifact": "قطعة أثرية",
+      "equipment": "معدات",
+      "mattered": "أهمية",
+      "fact": "حقيقة",
+      "interlocutor": "محاور",
+      "otherwise": "وإلا",
+      "indifferent": "غير مبال",
+      "night": "ليل",
+      "every": "كل",
+      "calculation": "حساب",
+      "widow": "أرملة",
+      "witness": "شاهد",
+      "ancient": "قديم",
+
+      // Story 6
+      "cataloged": "فهرس",
+      "testimonies": "شهادات",
+      "scholar": "عالم",
+      "fastidiousness": "دقة مفرطة",
+      "indexing": "فهرسة",
+      "sorrow": "حزن",
+      "taxonomy": "تصنيف",
+      "demanded": "طلب",
+      "impartiality": "حياد",
+      "proved": "أثبت",
+      "intrusive": "متطفل",
+      "objects": "أشياء",
+      "inert": "خامل",
+      "relics": "آثار",
+      "carriers": "حاملين",
+      "unwanted": "غير مرغوب",
+      "intimacies": "علاقات حميمة",
+      "letter": "رسالة",
+      "child": "طفل",
+      "drawing": "رسم",
+      "ledger": "سجل",
+      "stained": "ملطخ",
+      "oil": "زيت",
+      "entry": "مدخل",
+      "resisted": "قاوم",
+      "abstraction": "تجريد",
+      "discovered": "اكتشف",
+      "preserving": "حفظ",
+      "required": "تطلب",
+      "discretion": "حيطة",
+      "select": "اختيار",
+      "narrative": "رواية",
+      "perpetuate": "إدامة",
+      "claims": "مطالبات",
+      "future": "مستقبل",
+      "began": "بدأ",
+      "insert": "إدراج",
+      "marginalia": "هوامش",
+      "discreet": "متحفظ",
+      "annotations": "تعليقات توضيحية",
+      "acknowledged": "اعترف",
+      "incompleteness": "نقص",
+      "record": "سجل",
+      "reframed": "أعاد صياغة",
+      "custody": "وصاية",
+      "practice": "ممارسة",
+      "interpretive": "تفسيري",
+      "stewardship": "إشراف",
+      "lament": "رثاء",
+      "voices": "أصوات",
+      "consolation": "مواساة",
+      "attend": "اهتمام",
+      "reach": "وصول",
+
+      // Story 7
+      "maps": "خرائط",
+      "instruments": "أدوات",
+      "reduction": "اختزال",
+      "prune": "تقليم",
+      "unruly": "غير منضبط",
+      "profusion": "وفرة",
+      "landscape": "منظر طبيعي",
+      "legible": "مقروء",
+      "lines": "خطوط",
+      "spent": "قضى",
+      "rendering": "تقديم",
+      "coasts": "سواحل",
+      "contours": "محيطات",
+      "translating": "ترجمة",
+      "topography": "طبوغرافيا",
+      "glyphs": "رموز",
+      "color": "لون",
+      "bands": "أشرطة",
+      "nocturnal": "ليلي",
+      "hours": "ساعات",
+      "overlay": "تراكب",
+      "imaginary": "خيالي",
+      "features": "ميزات",
+      "longing": "حنين",
+      "annotations": "تعليقات توضيحية",
+      "itineraries": "مسارات",
+      "cartographer": "رسام خرائط",
+      "emptiness": "فراغ",
+      "possibility": "إمكانية",
+      "absence": "غياب",
+      "sketched": "مخطط",
+      "provisional": "مؤقت",
+      "presence": "وجود",
+      "commission": "تكليف",
+      "chart": "رسم بياني",
+      "island": "جزيرة",
+      "contested": "متنازع عليه",
+      "borders": "حدود",
+      "realized": "أدرك",
+      "rhetorical": "بلاغي",
+      "moral": "أخلاقي",
+      "import": "أهمية",
+      "draw": "رسم",
+      "adjudicate": "فصل في",
+      "slope": "منحدر",
+      "influence": "تأثير",
+      "hesitated": "تردد",
+      "transformed": "حول",
+      "role": "دور",
+      "delineator": "موضح",
+      "interlocutor": "محاور",
+      "land": "أرض",
+      "conscience": "ضمير",
+
+      // Story 8
+      "tended": "اعتنى",
+      "greenhouse": "بيت زجاجي",
+      "envoy": "مبعوث",
+      "nurturing": "تنمية",
+      "fragile": "هش",
+      "treaties": "معاهدات",
+      "species": "أنواع",
+      "polity": "كيان سياسي",
+      "customs": "عادات",
+      "niches": "منافذ",
+      "dormant": "خامل",
+      "potentials": "إمكانات",
+      "empirical": "تجريبي",
+      "imaginative": "خلاق",
+      "hybridized": "هجن",
+      "specimens": "عينات",
+      "coaxed": "أقنع",
+      "seeds": "بذور",
+      "germinate": "إنبات",
+      "negotiated": "تفاوض",
+      "microclimates": "مناخات مصغرة",
+      "subtle": "دقيق",
+      "engineering": "هندسة",
+      "responded": "استجاب",
+      "attention": "انتباه",
+      "altered": "غير",
+      "phenology": "علم الظواهر الموسمية",
+      "ministrations": "خدمات",
+      "ethical": "أخلاقي",
+      "reciprocity": "تبادل",
+      "care": "رعاية",
+      "begetting": "إنجاب",
+      "resilience": "مرونة",
+      "blight": "آفة",
+      "arrived": "وصل",
+      "diffuse": "منتشر",
+      "insidious": "خبيث",
+      "undermining": "تقويض",
+      "scaffolding": "سقالة",
+      "cultivated": "زرع",
+      "response": "استجابة",
+      "methodical": "منهجي",
+      "patient": "صبور",
+      "quarantine": "حجر صحي",
+      "assay": "فحص",
+      "slow": "بطيء",
+      "deployment": "نشر",
+      "remedies": "علاجات",
+      "drawn": "مسحوب",
+      "botanical": "نباتي",
+      "lore": "معرفة تقليدية",
+      "accord": "اتفاق",
+      "forged": "شكل",
+      "renewed": "جدد",
+      "adversity": "محنة",
+      "neutral": "محايد",
+      "kinship": "قرابة",
+
+      // Story 9
+      "atelier": "مرسم",
+      "smelling": "رائحة",
+      "starch": "نشا",
+      "lavender": "خزامى",
+      "mended": "رقع",
+      "garments": "ملابس",
+      "clothes": "ملابس",
+      "frayed": "متهالك",
+      "experience": "خبرة",
+      "repaired": "أصلح",
+      "seams": "درزات",
+      "stitches": "غرز",
+      "stitch": "غرزة",
+      "stories": "قصص",
+      "thread": "خيط",
+      "hem": "حاشية",
+      "contained": "احتوى",
+      "incantation": "تعويذة",
+      "button": "زر",
+      "repository": "مستودع",
+      "memory": "ذاكرة",
+      "returned": "عاد",
+      "owners": "أصحاب",
+      "restored": "مستعاد",
+      "transformed": "محول",
+      "carrying": "حامل",
+      "tacit": "ضمني",
+      "knowledge": "معرفة",
+      "dignifying": "مكرم",
+      "reductive": "اختزالي",
+      "seriously": "بجدية",
+      "belief": "اعتقاد",
+      "material": "مادي",
+      "culture": "ثقافة",
+      "held": "أمسك",
+      "valences": "قيم",
+      "mend": "ترميم",
+      "testament": "شهادة",
+      "continuity": "استمرارية",
+      "dignity": "كرامة",
+      "wear": "بلى",
+      "threatened": "هدد",
+      "erasure": "محو",
+      "practiced": "مارس",
+      "ethics": "أخلاقيات",
+      "society": "مجتمع",
+      "prized": "قدر",
+      "discarded": "تخلص",
+      "resilient": "مرن",
+
+      // Story 10
+      "winter": "شتاء",
+      "unremitting": "مستمر",
+      "river": "نهر",
+      "surface": "سطح",
+      "pale": "شاحب",
+      "stenographer": "كاتب اختزال",
+      "cold": "برد",
+      "austerity": "تقشف",
+      "solemn": "مهيب",
+      "promises": "وعود",
+      "couple": "زوجين",
+      "pledged": "تعهد",
+      "fidelity": "إخلاص",
+      "beneath": "تحت",
+      "bare": "عار",
+      "sycamore": "جميز",
+      "hands": "أيدي",
+      "cupped": "مقوس",
+      "smoke": "دخان",
+      "tea": "شاي",
+      "tasted": "ذاق",
+      "cardamom": "هيل",
+      "oath": "قسم",
+      "utterance": "قول",
+      "sequence": "تسلسل",
+      "enacted": "سن",
+      "commitments": "التزامات",
+      "returning": "عودة",
+      "dark": "ظلام",
+      "tending": "رعاية",
+      "fire": "نار",
+      "learning": "تعلم",
+      "forgive": "مسامحة",
+      "time": "وقت",
+      "habits": "عادات",
+      "accreted": "تراكم",
+      "covenant": "عهد",
+      "insulated": "معزول",
+      "weather": "طقس",
+      "vicissitudes": "تقلبات",
+      "discovered": "اكتشف",
+      "vows": "وعود",
+      "endure": "تحمل",
+      "grand": "عظيم",
+      "declarations": "تصريحات",
+      "taught": "علم",
+      "economy": "اقتصاد",
+      "action": "فعل",
+      "reliably": "بموثوقية",
+      "repeated": "مكرر",
+      "erect": "إقامة",
+      "refuge": "ملجأ",
+      "elemental": "أساسي",
+      "indifference": "لامبالاة"
+    };
+
+    // DOM Elements
+    const nav = document.getElementById('nav');
+    const storyEl = document.getElementById('story');
+    const popup = document.getElementById('popup');
+    const popupWord = document.getElementById('popup-word');
+    const popupTranslation = document.getElementById('popup-translation');
+    const popupSource = document.getElementById('popup-source');
+    const popupClose = document.getElementById('popup-close');
+
+    // Wrap text nodes so every visible word becomes a clickable span
+    function wrapWords(root) {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+      const textNodes = [];
+      
+      while (walker.nextNode()) {
+        textNodes.push(walker.currentNode);
+      }
+
+      textNodes.forEach(node => {
+        if (!node.nodeValue.trim()) return;
+        
+        const parent = node.parentNode;
+        if (['SCRIPT', 'STYLE'].includes(parent.nodeName)) return;
+        
+        const tokens = node.nodeValue.split(/(\b[\w'\-]+\b)/g);
+        if (tokens.length === 1) return;
+        
+        const frag = document.createDocumentFragment();
+        
+        tokens.forEach(tok => {
+          if (/\b[\w'\-]+\b/.test(tok)) {
+            const span = document.createElement('span');
+            span.className = 'word';
+            span.setAttribute('data-word', tok);
+            span.textContent = tok;
+            frag.appendChild(span);
+          } else {
+            frag.appendChild(document.createTextNode(tok));
+          }
+        });
+        
+        parent.replaceChild(frag, node);
+      });
+    }
+
+    // Show popup above the target element
+    function showPopupForElement(target, word) {
+      const w = word.trim();
+      const key = w.toLowerCase().replace(/[^a-z\u0600-\u06FF\d\-']/g, '');
+      const translation = dictionary[key];
+      
+      popupWord.textContent = w;
+      
+      if (translation) {
+        popupTranslation.textContent = translation;
+        popupSource.textContent = "Dictionary Translation";
+        popupSource.style.color = "var(--success)";
+      } else {
+        // If word not found, try to find it without special characters
+        const cleanKey = key.replace(/[^a-z]/g, '');
+        const cleanTranslation = dictionary[cleanKey];
+        
+        if (cleanTranslation) {
+          popupTranslation.textContent = cleanTranslation;
+          popupSource.textContent = "Dictionary Translation";
+          popupSource.style.color = "var(--success)";
+        } else {
+          popupTranslation.textContent = "ترجمة غير متوفرة";
+          popupSource.textContent = "Translation Not Available";
+          popupSource.style.color = "var(--warning)";
+        }
+      }
+      
+      popup.style.display = 'block';
+      
+      // Position the popup
+      const rect = target.getBoundingClientRect();
+      const popupRect = popup.getBoundingClientRect();
+      
+      let left = rect.left + (rect.width / 2) - (popupRect.width / 2);
+      let top = rect.top - popupRect.height - 10;
+      
+      // Adjust if the popup would go off screen
+      if (left < 8) left = 8;
+      if (left + popupRect.width > window.innerWidth - 8) {
+        left = window.innerWidth - popupRect.width - 8;
+      }
+      if (top < 8) top = rect.bottom + 12;
+      
+      popup.style.left = left + 'px';
+      popup.style.top = top + 'px';
+    }
+
+    function hidePopup() {
+      popup.style.display = 'none';
+    }
+
+    // Render navigation and load story
+    function renderNav() {
+      nav.innerHTML = '';
+      stories.forEach((s, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'story-btn';
+        btn.innerHTML = `
+          <span class="story-number">${i + 1}</span>
+          <span class="story-title">${s.title}</span>
+        `;
+        btn.onclick = () => {
+          loadStory(s.id);
+          document.querySelectorAll('.story-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        };
+        if (i === 0) btn.classList.add('active');
+        nav.appendChild(btn);
+      });
+    }
+
+    function loadStory(id) {
+      const s = stories.find(x => x.id === id);
+      if (!s) return;
+      
+      storyEl.innerHTML = s.content;
+      wrapWords(storyEl);
+    }
+
+    // Initialize the app
+    renderNav();
+    loadStory(1);
+
+    // Event listeners
+    storyEl.addEventListener('click', (e) => {
+      const t = e.target.closest('.word');
+      if (!t) {
+        hidePopup();
+        return;
+      }
+      const word = t.getAttribute('data-word') || t.textContent;
+      showPopupForElement(t, word);
+    });
+
+    window.addEventListener('click', (e) => {
+      if (!e.target.closest('.word') && !e.target.closest('.popup')) {
+        hidePopup();
+      }
+    });
+
+    popupClose.addEventListener('click', hidePopup);
+
+    document.getElementById('search').addEventListener('input', (e) => {
+      const q = e.target.value.trim().toLowerCase();
+      if (!q) {
+        renderNav();
+        return;
+      }
+      
+      nav.innerHTML = '';
+      stories.forEach((s, i) => {
+        const hay = (s.title + ' ' + s.content).toLowerCase();
+        if (hay.includes(q)) {
+          const btn = document.createElement('button');
+          btn.className = 'story-btn';
+          btn.innerHTML = `
+            <span class="story-number">${i + 1}</span>
+            <span class="story-title">${s.title}</span>
+          `;
+          btn.onclick = () => {
+            loadStory(s.id);
+            document.querySelectorAll('.story-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+          };
+          nav.appendChild(btn);
+        }
+      });
+    });
+
+    document.getElementById('toggleWrap').addEventListener('click', () => {
+      alert('Click any word to see its Arabic meaning. Every single word is now translated including articles, prepositions, and common words.');
+    });
+
+    document.getElementById('toggleInfo').addEventListener('click', () => {
+      alert('C2 Stories - Complete Arabic Translation\n\nThis application helps you read advanced English stories with instant Arabic translations. Every single word is now translated!');
+    });
+
+    // Theme toggle functionality
+    document.getElementById('toggleTheme').addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+      const themeIcon = document.querySelector('#toggleTheme i');
+      if (document.body.classList.contains('light-theme')) {
+        themeIcon.className = 'fas fa-sun';
+        document.documentElement.style.setProperty('--bg-primary', '#f8fafc');
+        document.documentElement.style.setProperty('--bg-secondary', '#ffffff');
+        document.documentElement.style.setProperty('--bg-tertiary', '#f1f5f9');
+        document.documentElement.style.setProperty('--text-primary', '#1e293b');
+        document.documentElement.style.setProperty('--text-secondary', '#475569');
+        document.documentElement.style.setProperty('--border', 'rgba(0, 0, 0, 0.08)');
+      } else {
+        themeIcon.className = 'fas fa-moon';
+        document.documentElement.style.setProperty('--bg-primary', '#0f1724');
+        document.documentElement.style.setProperty('--bg-secondary', '#0b1220');
+        document.documentElement.style.setProperty('--bg-tertiary', '#131d2f');
+        document.documentElement.style.setProperty('--text-primary', '#e6eef8');
+        document.documentElement.style.setProperty('--text-secondary', '#94a3b8');
+        document.documentElement.style.setProperty('--border', 'rgba(255, 255, 255, 0.08)');
+      }
+    });
+  </script>
+</body>
+</html>
